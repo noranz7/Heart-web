@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Ziad! 🎉</title>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fcedf2; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            direction: ltr;
+        }
+
+        /* حاوية الصفحات */
+        .page-container {
+            display: none;
+            width: 100%;
+            max-width: 450px;
+            height: 90vh;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        /* الصفحة النشطة هي اللي بتظهر */
+        .page-container.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* تصميم صفحة الباسورد (0120) */
+        .snoopy-img {
+            width: 140px;
+            margin-bottom: 20px;
+        }
+
+        .pass-title {
+            color: #ff6b8b;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .inputs-flex {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .code-input {
+            width: 45px;
+            height: 50px;
+            border: 2.5px solid #ffd0da;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b8b;
+            background-color: #fff9fa;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .code-input:focus {
+            border-color: #ff6b8b;
+            background-color: #fff;
+        }
+
+        /* رسالة الخطأ تحت الخانات */
+        .error-message {
+            color: #e2365d;
+            font-size: 0.95rem;
+            font-weight: bold;
+            margin-top: 10px;
+            min-height: 20px;
+            visibility: hidden;
+        }
+
+        /* تصميم صفحة الكيكة بعد حذف الـ GIF */
+        .cake-img {
+            width: 230px; /* كبرت الحجم شوية عشان الصفحة بقت فاضية وشكلها أحلى */
+            max-width: 100%;
+            margin-bottom: 35px;
+        }
+
+        .blow-button {
+            background-color: #ff6b8b;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 107, 139, 0.3);
+            transition: 0.3s;
+        }
+
+        .blow-button:hover {
+            transform: scale(1.05);
+            background-color: #ff4f76;
+        }
+
+        /* تصميم صفحة الرسالة والكاميرا (ربانزل) */
+        .message-title {
+            color: #ff6b8b;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .collage-container {
+            position: relative;
+            width: 100%;
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .rapunzel-box {
+            position: relative;
+            width: 150px;
+        }
+
+        .rapunzel-img {
+            width: 100%;
+            border-radius: 10px;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* مكان الـ GIF اللي جنب ربانزل (الكلب) */
+        .dog-gif-container {
+            width: 90px;
+            height: auto;
+        }
+
+        .dog-gif-container img {
+            width: 100%;
+        }
+
+        /* نوتة الكلام لزياد */
+        .letter-card {
+            background: #fff5f7;
+            border: 2px dashed #ffb3c6;
+            padding: 15px;
+            border-radius: 15px;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        /* زراير التنقل */
+        .buttons-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .nav-button {
+            background-color: #ffffd0;
+            border: 2px solid #ff6b8b;
+            color: #ff6b8b;
+            padding: 8px 20px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav-button.next-pink {
+            background-color: #ff6b8b;
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* صفحة الخانات التلاتة */
+        .icons-grid {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin: 40px 0;
+        }
+
+        .gift-icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 3rem; 
+            transition: 0.3s;
+        }
+
+        .gift-icon-btn:hover {
+            transform: scale(1.2);
+        }
+
+        /* الكاميرا الفورية */
+        .instax-camera {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .polaroid-photo {
+            width: 160px;
+            background: white;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid #ddd;
+            margin: 15px auto;
+            transform: rotate(-3deg);
+            display: none; 
+        }
+
+        .polaroid-photo img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* مشغل الأغنية */
+        .audio-player-container {
+            margin: 30px 0;
+            width: 100%;
+        }
+
+        audio {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="page-container active">
+        <img src="snoopy_flowers.png" alt="Snoopy Flowers" class="snoopy-img" onerror="this.src='https://placehold.co/150x150?text=Snoopy'">
+        
+        <div class="pass-title">Enter the code 🌟</div>
+        
+        <div class="inputs-flex">
+            <input type="password" class="code-input" id="code1" maxlength="1" oninput="moveFocus(this, 'code2')">
+            <input type="password" class="code-input" id="code2" maxlength="1" oninput="moveFocus(this, 'code3')">
+            <input type="password" class="code-input" id="code3" maxlength="1" oninput="moveFocus(this, 'code4')">
+            <input type="password" class="code-input" id="code4" maxlength="1" oninput="validateCode()">
+        </div>
+
+        <div id="errorMsg" class="error-message">Wrong Code! Try again 🔍</div>
+    </div>
+
+    <div id="page2" class="page-container">
+        <img src="birthday_cake.png" alt="Birthday Cake" class="cake-img" onerror="this.src='https://placehold.co/200x200?text=Cake+Image'">
+        <button class="blow-button" onclick="changePage('page3')">BLOW</button>
+    </div>
+
+    <div id="page3" class="page-container">
+        <div class="message-title">ur wish kept in my heart ❤️</div>
+        
+        <div class="collage-container">
+            <div class="rapunzel-box">
+                <img src="your_special_image_1.jpg" alt="Rapunzel / Special Pic" class="rapunzel-img" onerror="this.src='https://placehold.co/150x180?text=Rapunzel+or+Pic+1'">
+            </div>
+            <div class="dog-gif-container">
+                <img src="dog_beside_rapunzel.gif" alt="Dog GIF" onerror="this.src='https://placehold.co/90x90?text=Dog+GIF'">
+            </div>
+        </div>
+
+        <div class="letter-card">
+            Happy birthday ziad! I know I always say this to you, but I really do miss you. Thank you for being a good boyfriend and for always supporting me.
+        </div>
+
+        <div class="buttons-group">
+            <button class="nav-button" onclick="changePage('page2')">Back</button>
+            <button class="nav-button next-pink" onclick="changePage('page4')">Next</button>
+        </div>
+    </div>
+
+    <div id="page4" class="page-container">
+        <div class="message-title" style="margin-bottom: 5px;">These are for you!</div>
+        <p style="color: #888; font-size: 0.9rem;">Choose one to open</p>
+        
+        <div class="icons-grid">
+            <button class="gift-icon-btn" onclick="changePage('sub-camera')" title="Camera">📷</button>
+            <button class="gift-icon-btn" onclick="changePage('sub-bottle')" title="Message Bottle">🍾</button>
+            <button class="gift-icon-btn" onclick="changePage('sub-star')" title="Music Star">⭐</button>
+        </div>
+
+        <button class="nav-button" onclick="changePage('page3')">Back</button>
+    </div>
+
+    <div id="sub-camera" class="page-container">
+        <div class="message-title">Instax Camera 📸</div>
+        <div class="instax-camera">📷</div>
+        <button class="blow-button" style="padding: 8px 20px; font-size: 0.95rem;" onclick="snapPhoto()">Take a picture</button>
+        
+        <div class="polaroid-photo" id="polaroidBox">
+            <img src="camera_photo_output.jpg" alt="Your Polaroid" onerror="this.src='https://placehold.co/140x140?text=Your+Photo+Here'">
+        </div>
+
+        <button class="nav-button" style="margin-top: 20px;" onclick="changePage('page4')">Back</button>
+    </div>
+
+    <div id="sub-bottle" class="page-container">
+        <div class="message-title">Message in a Bottle 🍾</div>
+        <div class="letter-card" style="background: #fffdf2; border-color: #ffd466; margin-top: 20px;">
+            <p id="happyMessageText">
+                كل سنة وأنت طيب يا زياد، شفت الرسالة السحرية دي؟ هنا تقدري تكتبي كل الكلام اللي في قلبك لزياد وهتظهرله هنا بالظبط! 💖
+            </p>
+        </div>
+        <img src="bottle_side_image.jpg" alt="Special Pic 2" style="width: 120px; border-radius: 10px; margin-top: 15px;" onerror="this.src='https://placehold.co/120x120?text=Image+2+Here'">
+
+        <button class="nav-button" style="margin-top: 20px;" onclick="changePage('page4')">Back</button>
+    </div>
+
+    <div id="sub-star" class="page-container">
+        <div class="message-title">Your Special Song ⭐</div>
+        <p style="color: #666; margin-top: 15px; font-size: 0.95rem;">Until I Found You 🎶</p>
+        <div class="audio-player-container">
+            <audio controls>
+                <source src="until_i_found_you.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        <button class="nav-button" onclick="changePage('page4')">Back</button>
+    </div>
+
+    <script>
+        function moveFocus(current, nextId) {
+            if (current.value.length === 1) {
+                document.getElementById(nextId).focus();
+            }
+        }
+
+        function validateCode() {
+            let c1 = document.getElementById('code1').value;
+            let c2 = document.getElementById('code2').value;
+            let c3 = document.getElementById('code3').value;
+            let c4 = document.getElementById('code4').value;
+            
+            let fullCode = c1 + c2 + c3 + c4;
+            let errorElement = document.getElementById('errorMsg');
+            
+            if(fullCode === "0120") {
+                errorElement.style.visibility = 'hidden'; 
+                changePage('page2');
+            } else {
+                errorElement.style.visibility = 'visible';
+                
+                document.getElementById('code1').value = '';
+                document.getElementById('code2').value = '';
+                document.getElementById('code3').value = '';
+                document.getElementById('code4').value = '';
+                document.getElementById('code1').focus();
+            }
+        }
+
+        function changePage(pageId) {
+            let pages = document.querySelectorAll('.page-container');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function snapPhoto() {
+            let photo = document.getElementById('polaroidBox');
+            photo.style.display = 'block';
+            photo.style.transition = '2s';
+            photo.style.opacity = '0';
+            setTimeout(() => {
+                photo.style.opacity = '1';
+            }, 100);
+        }
+    </script>
+</body>
+</html>
