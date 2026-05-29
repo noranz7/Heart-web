@@ -49,6 +49,7 @@
         .snoopy-img {
             width: 140px;
             margin-bottom: 20px;
+            border-radius: 10px;
         }
 
         .pass-title {
@@ -94,11 +95,12 @@
             visibility: hidden;
         }
 
-        /* تصميم صفحة الكيكة بعد حذف الـ GIF */
-        .cake-img {
-            width: 230px; /* كبرت الحجم شوية عشان الصفحة بقت فاضية وشكلها أحلى */
-            max-width: 100%;
-            margin-bottom: 35px;
+        /* تصميم صفحة الـ BLOW والـ GIFs */
+        .blow-gif {
+            width: 180px;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 10px;
         }
 
         .blow-button {
@@ -112,6 +114,7 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 107, 139, 0.3);
             transition: 0.3s;
+            margin-top: 10px;
         }
 
         .blow-button:hover {
@@ -148,7 +151,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* مكان الـ GIF اللي جنب ربانزل (الكلب) */
         .dog-gif-container {
             width: 90px;
             height: auto;
@@ -217,16 +219,17 @@
             transform: scale(1.2);
         }
 
-        /* الكاميرا الفورية */
-        .instax-camera {
-            font-size: 4rem;
+        /* الكاميرا الفورية والبولاروايد */
+        .instax-camera-img {
+            width: 160px;
+            height: auto;
             margin-bottom: 15px;
         }
 
         .polaroid-photo {
             width: 160px;
             background: white;
-            padding: 10px 10px 25px 10px;
+            padding: 10px 10px 10px 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             border: 1px solid #ddd;
             margin: 15px auto;
@@ -239,6 +242,13 @@
             height: 140px;
             object-fit: cover;
             border-radius: 4px;
+        }
+
+        .beauty-text {
+            color: #ff6b8b;
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-top: 8px;
         }
 
         /* مشغل الأغنية */
@@ -255,7 +265,7 @@
 <body>
 
     <div id="page1" class="page-container active">
-        <img src="snoopy_flowers.png" alt="Snoopy Flowers" class="snoopy-img" onerror="this.src='https://placehold.co/150x150?text=Snoopy'">
+        <img src="8289052640ae91baebec85fc98b8d5c2.jpg" alt="Snoopy" class="snoopy-img">
         
         <div class="pass-title">Enter the code 🌟</div>
         
@@ -270,7 +280,9 @@
     </div>
 
     <div id="page2" class="page-container">
-        <img src="birthday_cake.png" alt="Birthday Cake" class="cake-img" onerror="this.src='https://placehold.co/200x200?text=Cake+Image'">
+        <img src="1a8ef003c6bd66392f28b21e660c1951.gif" alt="Birthday GIF 1" class="blow-gif">
+        <img src="7bfba42026f211cf562e3ded23ffb7f1.gif" alt="Birthday GIF 2" class="blow-gif">
+        
         <button class="blow-button" onclick="changePage('page3')">BLOW</button>
     </div>
 
@@ -279,7 +291,7 @@
         
         <div class="collage-container">
             <div class="rapunzel-box">
-                <img src="your_special_image_1.jpg" alt="Rapunzel / Special Pic" class="rapunzel-img" onerror="this.src='https://placehold.co/150x180?text=Rapunzel+or+Pic+1'">
+                <img src="your_special_image_1.jpg" alt="Rapunzel" class="rapunzel-img" onerror="this.src='https://placehold.co/150x180?text=Rapunzel'">
             </div>
             <div class="dog-gif-container">
                 <img src="dog_beside_rapunzel.gif" alt="Dog GIF" onerror="this.src='https://placehold.co/90x90?text=Dog+GIF'">
@@ -311,11 +323,13 @@
 
     <div id="sub-camera" class="page-container">
         <div class="message-title">Instax Camera 📸</div>
-        <div class="instax-camera">📷</div>
+        <img src="84c74213c8e7e33ff695378d567a3889.jpg" alt="Instax Camera" class="instax-camera-img">
+        
         <button class="blow-button" style="padding: 8px 20px; font-size: 0.95rem;" onclick="snapPhoto()">Take a picture</button>
         
         <div class="polaroid-photo" id="polaroidBox">
             <img src="camera_photo_output.jpg" alt="Your Polaroid" onerror="this.src='https://placehold.co/140x140?text=Your+Photo+Here'">
+            <div class="beauty-text">That's ur beauty.</div>
         </div>
 
         <button class="nav-button" style="margin-top: 20px;" onclick="changePage('page4')">Back</button>
@@ -323,22 +337,24 @@
 
     <div id="sub-bottle" class="page-container">
         <div class="message-title">Message in a Bottle 🍾</div>
-        <div class="letter-card" style="background: #fffdf2; border-color: #ffd466; margin-top: 20px;">
+        
+        <div class="letter-card" style="background: #fffdf2; border-color: #ffd466; margin-top: 10px; text-align: right; direction: rtl; font-size: 0.9rem;">
             <p id="happyMessageText">
-                كل سنة وأنت طيب يا زياد، شفت الرسالة السحرية دي؟ هنا تقدري تكتبي كل الكلام اللي في قلبك لزياد وهتظهرله هنا بالظبط! 💖
+                زياد، انت مش بس مجرد حد فحياتي والله، انت اكتر حد أثر فحياتي واكتر حد أنا حبيته ف حياتي كلها بجد، انت مش مجرد شخص عابر وأنا واثقة اوي فيك وعارفة أننا مستحيل نتفرق ف يوم، أنا حتى مش هبعد عنك مهما عملت، وأنا اصلا واثقة فيك وعارفة انك مش هتزعلني ف يوم حتى الزعل مش بقدر ازعله منك، انت اجمل حاجة ف حياتي ياحبيبي، اجمل شخص دخل فحياتي، يارب بجد تبقى نصيبي ونكون مع بعض وتنام فحضني يارب، أنا بجد بحبك اكتر من الدنيا دي كلها، بحبك، انت الحاجة الوحيدة اللي مصبراني عالحياة دي، أنا بحبك اكتر من اي حاجة، ربنا يديمك ليا يارب”كده كده هندوم لبعض“، يارب بجد، انت مش متخيل ولا عارف انا بحبك قد ايه ياحب حياتي، انت النور والشمعة اللي بتضيء عالمي وكوني وحياتي، انت الوردة اللي بتحلي شكلي وبتدي منظر ليا، انت الحاجة اللي مقدرش اعيش منغيرها، انت الفرق اللي بيصنع يومي دايمًا، كلامي ساعات التعبير بتاعه بيبقى كده فا بيتحس أنه من شات جي بي تي مع أنه والله كلامي، أنا بحبك اوي بجد، هنكون لبعض دايمًا، عشان احنا soulmates.
             </p>
         </div>
-        <img src="bottle_side_image.jpg" alt="Special Pic 2" style="width: 120px; border-radius: 10px; margin-top: 15px;" onerror="this.src='https://placehold.co/120x120?text=Image+2+Here'">
+        <img src="889981d860e306db3e08c8db4933c867.jpg" alt="Special Message" style="width: 140px; border-radius: 10px; margin-top: 5px;">
 
-        <button class="nav-button" style="margin-top: 20px;" onclick="changePage('page4')">Back</button>
+        <button class="nav-button" style="margin-top: 15px;" onclick="changePage('page4')">Back</button>
     </div>
 
     <div id="sub-star" class="page-container">
         <div class="message-title">Your Special Song ⭐</div>
-        <p style="color: #666; margin-top: 15px; font-size: 0.95rem;">Until I Found You 🎶</p>
+        <p style="color: #666; margin-top: 15px; font-size: 0.95rem; font-weight: bold;">Michael Jackson - Heaven Can Wait 🎶</p>
+        
         <div class="audio-player-container">
             <audio controls>
-                <source src="until_i_found_you.mp3" type="audio/mpeg">
+                <source src="Michael Jackson - Heaven Can Wait (Audio).mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
         </div>
